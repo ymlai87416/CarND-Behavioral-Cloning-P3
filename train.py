@@ -5,7 +5,7 @@ import tensorflow as tf
 
 lines = []
 
-with open("./train_data/track1/driving_log.csv") as csvfile:
+with open("./train_data/track_1_normal/driving_log.csv") as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
             lines.append(line)
@@ -15,19 +15,21 @@ measurements = []
 correction = [0, 0.2, -0.2]
 
 for line in lines:
+	measurement = float(line[3])
+	if(measurement > -0.05 and measurement < -0.05 and random.random() > 0.3):
+		continue
     for i in range(3):
         source_path = line[i]
         filename = source_path.split('\\')[-1]
-        current_path = './train_data/track1/IMG/' + filename
-        #print('debugx', current_path)
+        current_path = './train_data/track_1_normal/IMG/' + filename
         image = cv2.imread(current_path)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
+        #image = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
         images.append(image)
-        measurement = float(line[3])
         measurements.append(measurement + correction[i])
 
 augmented_images, augmented_measurements = [], []
 for image, measurement in zip(images, measurements):
+	#print('debug', image)
     augmented_images.append(image)
     augmented_measurements.append(measurement)
     augmented_images.append(cv2.flip(image, 1))
@@ -39,10 +41,11 @@ y_train = np.array(augmented_measurements)
 #print('debug', X_train, y_train)
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Cropping2D
+from keras.layers import Flatten, Dense, Lambda, Cropping2D, Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
+dropout_rate=0.5
 
 model = Sequential()
 model.add(Lambda(lambda x: x /255.0 - 0.5, input_shape=(160,320,3)))
@@ -60,10 +63,15 @@ model.add(Convolution2D(64, 3, 3, activation="relu"))
 model.add(Convolution2D(64, 3, 3, activation="relu"))
 # input 64@1x32
 model.add(Flatten())
+model.add(Dropout(dropout_rate))
 model.add(Dense(1164))
+model.add(Dropout(dropout_rate))
 model.add(Dense(100))
+model.add(Dropout(dropout_rate))
 model.add(Dense(50))
+model.add(Dropout(dropout_rate))
 model.add(Dense(10))
+model.add(Dropout(dropout_rate))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
