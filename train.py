@@ -2,6 +2,7 @@ import csv
 import cv2
 import numpy as np
 import tensorflow as tf
+from PIL import Image
 
 lines = []
 
@@ -22,8 +23,8 @@ for line in lines:
         source_path = line[i]
         filename = source_path.split('\\')[-1]
         current_path = './train_data/track_1_normal/IMG/' + filename
-        image = cv2.imread(current_path)
-        #image = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
+        image = Image.open(current_path)
+        image = np.array(image.convert('YCbCr'))
         images.append(image)
         measurements.append(measurement + correction[i])
 
