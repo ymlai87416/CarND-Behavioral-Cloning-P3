@@ -73,12 +73,15 @@ class Application:
                 lines_copy = lines_src[start:end]
                 for line in lines_copy:
                     for i in range(3):
-                        picture_src = line[i]
-                        head, tail = os.path.split(picture_src)
-                        picture_dst = os.path.join(image_dst_dir, tail)
-                        line[i] = picture_dst
-                        copyfile(picture_src, picture_dst)
-                lines_dst.append(lines_copy)
+                        try:
+                            picture_src = line[i]
+                            head, tail = os.path.split(picture_src)
+                            picture_dst = os.path.join(image_dst_dir, tail)
+                            line[i] = picture_dst
+                            copyfile(picture_src, picture_dst)
+                        except Exception:
+                            self.logger.error("Error when deleting file.", exc_info=True)
+                lines_dst = lines_dst + lines_copy
                 self.writeTrainData(dst, lines_dst)
             else:
                 raise Exception("Source is not a proper train data directory.")
@@ -99,6 +102,31 @@ class Application:
                             self.logger.error("Error when deleting file.", exc_info=True)
 
                 del lines_src[start:end]
+                self.writeTrainData(src, lines_src)
+            else:
+                raise Exception("Source is not a proper train data directory.")
+
+        def fixImageLink(self, src):
+            image_dir = os.path.join(src, "IMG")
+            csv_flname = os.path.join(src, "driving_log.csv")
+            if (os.path.isdir(src) and os.path.isfile(csv_flname) and os.path.isdir(image_dir)):
+                lines_src = self.readTrainData(src)
+
+                for line in lines_src:
+                    for i in range(3):
+                        try:
+                            picture = line[i]
+                            if("/" in picture):
+                                filename = picture.split('/')[-1]
+                                picture = os.path.join(image_dir, filename)
+                                line[i] = picture
+                            else:
+                                filename = picture.split('\\')[-1]
+                                picture = os.path.join(image_dir, filename)
+                                line[i] = picture
+                        except Exception:
+                            self.logger.error("Error when deleting file.", exc_info=True)
+
                 self.writeTrainData(src, lines_src)
             else:
                 raise Exception("Source is not a proper train data directory.")
