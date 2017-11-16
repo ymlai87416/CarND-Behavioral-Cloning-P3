@@ -22,10 +22,12 @@ This editor helps you to remove unwanted data point in your dataset so that you 
 To choose a source train set and destination train set, please click the "..." button to select the directory in the prompt dialog.
 
 Specify the portion of source train set to be copied by using the sliding bars. (Start position & end position)
+
 ![alt text][image1]
 
 
-Specify the portion of source train set to be removed by using the sliding bars. (Start position & end position)![alt text][image2]
+Specify the portion of source train set to be removed by using the sliding bars. (Start position & end position)
+
 ![alt text][image2]
 
 
