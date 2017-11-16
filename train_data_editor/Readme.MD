@@ -17,6 +17,12 @@ This editor helps you to remove unwanted data point in your dataset so that you 
 * Fix image link
 * and show you statistics on the steering across the dataset
 
+## How to use
+Just execute the main.py under the editor directory
+```sh
+python main.py
+```
+
 ## Screenshot 
 
 To choose a source train set and destination train set, please click the "..." button to select the directory in the prompt dialog.
