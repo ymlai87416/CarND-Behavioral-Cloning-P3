@@ -73,7 +73,7 @@ class SimplePIDController:
 
 controller = SimplePIController(0.1, 0.002)
 #controller = SimplePIDController(0.1, 0.02, 0.02)
-set_speed = 25
+set_speed = 20
 controller.set_desired(set_speed)
 
 

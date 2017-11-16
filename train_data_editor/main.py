@@ -27,13 +27,59 @@ class FolkTab(QWidget):
         self.picture_right.setMinimumWidth(320)
         self.picture_right.setMinimumHeight(160)
 
+        left_guage_layout = QVBoxLayout()
+
+        lbl_steering = QLabel("Steering")
+        lbl_throttle = QLabel("Throttle")
+        lbl_break = QLabel("Break")
+        lbl_speed = QLabel("Speed")
+
+        self.label_steering_left = QLabel(self)
+        self.label_throttle_left = QLabel(self)
+        self.label_break_left = QLabel(self)
+        self.label_speed_left = QLabel(self)
+
+        left_guage_layout.addWidget(lbl_steering)
+        left_guage_layout.addWidget(self.label_steering_left)
+        left_guage_layout.addWidget(lbl_throttle)
+        left_guage_layout.addWidget(self.label_throttle_left)
+        left_guage_layout.addWidget(lbl_break)
+        left_guage_layout.addWidget(self.label_break_left)
+        left_guage_layout.addWidget(lbl_speed)
+        left_guage_layout.addWidget(self.label_speed_left)
+
+        right_guage_layout = QVBoxLayout()
+
+        lbl_steering = QLabel("Steering")
+        lbl_throttle = QLabel("Throttle")
+        lbl_break = QLabel("Break")
+        lbl_speed = QLabel("Speed")
+
+        self.label_steering_right = QLabel(self)
+        self.label_throttle_right = QLabel(self)
+        self.label_break_right = QLabel(self)
+        self.label_speed_right = QLabel(self)
+
+        right_guage_layout.addWidget(lbl_steering)
+        right_guage_layout.addWidget(self.label_steering_right)
+        right_guage_layout.addWidget(lbl_throttle)
+        right_guage_layout.addWidget(self.label_throttle_right)
+        right_guage_layout.addWidget(lbl_break)
+        right_guage_layout.addWidget(self.label_break_right)
+        right_guage_layout.addWidget(lbl_speed)
+        right_guage_layout.addWidget(self.label_speed_right)
+
         pictureLayout = QHBoxLayout()
         pictureLayout.addWidget(self.picture_left)
+        pictureLayout.addLayout(left_guage_layout)
         pictureLayout.addWidget(self.picture_right)
+        pictureLayout.addLayout(right_guage_layout)
 
         formLayout = QFormLayout()
 
         self.label_left = QLabel("Start position: ")
+
+        sliderLayout = QHBoxLayout();
         self.slider_left = QSlider(Qt.Horizontal)
         self.slider_left.setMinimum(0)
         self.slider_left.setMaximum(0)
@@ -41,9 +87,18 @@ class FolkTab(QWidget):
         self.slider_left.setTickPosition(QSlider.TicksBelow)
         self.slider_left.setTickInterval(100)
         self.slider_left.valueChanged.connect(self.valueChangeLeft)
-        formLayout.addRow(self.label_left, self.slider_left)
+
+        self.label_sl_left = QLineEdit(self)
+        self.label_sl_left.setReadOnly(True)
+        self.label_sl_left.setMaximumWidth(30)
+        sliderLayout.addWidget(self.slider_left)
+        sliderLayout.addWidget(self.label_sl_left)
+
+        formLayout.addRow(self.label_left, sliderLayout)
 
         self.label_right = QLabel("End position: ")
+
+        sliderLayout = QHBoxLayout();
         self.slider_right = QSlider(Qt.Horizontal)
         self.slider_right.setMinimum(0)
         self.slider_right.setMaximum(0)
@@ -51,7 +106,14 @@ class FolkTab(QWidget):
         self.slider_right.setTickPosition(QSlider.TicksBelow)
         self.slider_right.setTickInterval(100)
         self.slider_right.valueChanged.connect(self.valueChangeRight)
-        formLayout.addRow(self.label_right, self.slider_right)
+
+        self.label_sl_right = QLineEdit(self)
+        self.label_sl_right.setReadOnly(True)
+        self.label_sl_right.setMaximumWidth(30)
+        sliderLayout.addWidget(self.slider_right)
+        sliderLayout.addWidget(self.label_sl_right)
+
+        formLayout.addRow(self.label_right, sliderLayout)
 
         self.label_src = QLabel("Source dir: ")
         srcLayout = QHBoxLayout()
@@ -98,20 +160,30 @@ class FolkTab(QWidget):
         src = QFileDialog.getExistingDirectory()
         self.edit_src.setText(src)
         self.lines_src = core.readTrainData(src)
-        self.slider_left.setMaximum(len(self.lines_src)-1)
-        self.slider_right.setMaximum(len(self.lines_src) - 1)
+        self.slider_left.setMaximum(len(self.lines_src))
+        self.slider_right.setMaximum(len(self.lines_src))
 
     def valueChangeLeft(self):
         leftIdx = self.slider_left.value()
         try:
+            self.label_sl_left.setText(str(leftIdx))
             self.picture_left.setPixmap(QPixmap(self.lines_src[leftIdx][0]))
+            self.label_steering_left.setText(self.lines_src[leftIdx][3])
+            self.label_throttle_left.setText(self.lines_src[leftIdx][4])
+            self.label_break_left.setText(self.lines_src[leftIdx][5])
+            self.label_speed_left.setText(self.lines_src[leftIdx][6])
         except Exception:
             pass
 
     def valueChangeRight(self):
         rightIdx = self.slider_right.value()
         try:
+            self.label_sl_right.setText(str(rightIdx))
             self.picture_right.setPixmap(QPixmap(self.lines_src[rightIdx][0]))
+            self.label_steering_right.setText(self.lines_src[rightIdx][3])
+            self.label_throttle_right.setText(self.lines_src[rightIdx][4])
+            self.label_break_right.setText(self.lines_src[rightIdx][5])
+            self.label_speed_right.setText(self.lines_src[rightIdx][6])
         except Exception:
             pass
 
@@ -137,9 +209,53 @@ class RemoveTab(QWidget):
         self.picture_right.setMinimumWidth(320)
         self.picture_right.setMinimumHeight(160)
 
+        left_guage_layout = QVBoxLayout()
+
+        lbl_steering = QLabel("Steering")
+        lbl_throttle = QLabel("Throttle")
+        lbl_break = QLabel("Break")
+        lbl_speed = QLabel("Speed")
+
+        self.label_steering_left = QLabel(self)
+        self.label_throttle_left = QLabel(self)
+        self.label_break_left = QLabel(self)
+        self.label_speed_left = QLabel(self)
+
+        left_guage_layout.addWidget(lbl_steering)
+        left_guage_layout.addWidget(self.label_steering_left)
+        left_guage_layout.addWidget(lbl_throttle)
+        left_guage_layout.addWidget(self.label_throttle_left)
+        left_guage_layout.addWidget(lbl_break)
+        left_guage_layout.addWidget(self.label_break_left)
+        left_guage_layout.addWidget(lbl_speed)
+        left_guage_layout.addWidget(self.label_speed_left)
+
+        right_guage_layout = QVBoxLayout()
+
+        lbl_steering = QLabel("Steering")
+        lbl_throttle = QLabel("Throttle")
+        lbl_break = QLabel("Break")
+        lbl_speed = QLabel("Speed")
+
+        self.label_steering_right = QLabel(self)
+        self.label_throttle_right = QLabel(self)
+        self.label_break_right = QLabel(self)
+        self.label_speed_right = QLabel(self)
+
+        right_guage_layout.addWidget(lbl_steering)
+        right_guage_layout.addWidget(self.label_steering_right)
+        right_guage_layout.addWidget(lbl_throttle)
+        right_guage_layout.addWidget(self.label_throttle_right)
+        right_guage_layout.addWidget(lbl_break)
+        right_guage_layout.addWidget(self.label_break_right)
+        right_guage_layout.addWidget(lbl_speed)
+        right_guage_layout.addWidget(self.label_speed_right)
+
         pictureLayout = QHBoxLayout()
         pictureLayout.addWidget(self.picture_left)
+        pictureLayout.addLayout(left_guage_layout)
         pictureLayout.addWidget(self.picture_right)
+        pictureLayout.addLayout(right_guage_layout)
 
         formLayout = QFormLayout()
 
@@ -204,8 +320,8 @@ class RemoveTab(QWidget):
         src = QFileDialog.getExistingDirectory()
         self.edit_src.setText(src)
         self.lines_src = core.readTrainData(src)
-        self.slider_left.setMaximum(len(self.lines_src) - 1)
-        self.slider_right.setMaximum(len(self.lines_src) - 1)
+        self.slider_left.setMaximum(len(self.lines_src))
+        self.slider_right.setMaximum(len(self.lines_src))
         self.slider_left.setValue(0)
         self.slider_right.setValue(0)
 
@@ -214,6 +330,10 @@ class RemoveTab(QWidget):
         try:
             self.label_sl_left.setText(str(leftIdx))
             self.picture_left.setPixmap(QPixmap(self.lines_src[leftIdx][0]))
+            self.label_steering_left.setText(self.lines_src[leftIdx][3])
+            self.label_throttle_left.setText(self.lines_src[leftIdx][4])
+            self.label_break_left.setText(self.lines_src[leftIdx][5])
+            self.label_speed_left.setText(self.lines_src[leftIdx][6])
         except Exception:
             pass
 
@@ -222,6 +342,10 @@ class RemoveTab(QWidget):
         try:
             self.label_sl_right.setText(str(rightIdx))
             self.picture_right.setPixmap(QPixmap(self.lines_src[rightIdx][0]))
+            self.label_steering_right.setText(self.lines_src[rightIdx][3])
+            self.label_throttle_right.setText(self.lines_src[rightIdx][4])
+            self.label_break_right.setText(self.lines_src[rightIdx][5])
+            self.label_speed_right.setText(self.lines_src[rightIdx][6])
         except Exception:
             pass
 
