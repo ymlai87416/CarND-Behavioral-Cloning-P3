@@ -2,7 +2,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./screenshots/Copy_data.png "Folk data points"
+[image1]: ./screenshots/copy_data.png "Folk data points"
 [image2]: ./screenshots/Remove_data.png "remove data points"
 [image3]: ./screenshots/statistic.PNG "show train set steering statistics"
 [image4]: ./screenshots/Utilities.png "Utilities screen"
