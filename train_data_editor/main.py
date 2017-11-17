@@ -355,8 +355,8 @@ class RemoveTab(QWidget):
         core.removeFrom(self.edit_src.text(), start, end)
 
         self.lines_src = core.readTrainData(self.edit_src.text())
-        self.slider_left.setMaximum(len(self.lines_src) - 1)
-        self.slider_right.setMaximum(len(self.lines_src) - 1)
+        self.slider_left.setMaximum(len(self.lines_src))
+        self.slider_right.setMaximum(len(self.lines_src))
         self.slider_left.setValue(0)
         self.slider_right.setValue(0)
 
@@ -366,7 +366,9 @@ class TrainDataStaticCanvas(FigureCanvas):
     def __init__(self, src, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.src = src
-        self.axes = fig.add_subplot(111)
+        self.axes_m = fig.add_subplot(211)
+        self.axes_sp = fig.add_subplot(212)
+        fig.subplots_adjust(hspace=0.5, wspace=0)
 
         self.compute_initial_figure()
 
@@ -381,15 +383,23 @@ class TrainDataStaticCanvas(FigureCanvas):
     def compute_initial_figure(self):
         lines = core.readTrainData(self.src)
         measurements = []
+        speeds = []
         correction = [0, 0.2, -0.2]
         for line in lines:
-            measurement = float(line[3])
-            for i in range(3):
-                source_path = line[i]
-                filename = source_path.split('\\')[-1]
-                measurements.append(measurement + correction[i])
+            try:
+                measurement = float(line[3])
+                speeds.append(float(line[6]))
+                for i in range(3):
+                    source_path = line[i]
+                    filename = source_path.split('\\')[-1]
+                    measurements.append(measurement + correction[i])
+            except Exception:
+                pass
 
-        self.axes.hist(measurements, 100, normed=1, facecolor='green', alpha=0.75)
+        self.axes_m.hist(measurements, 100, normed=1, facecolor='green', alpha=0.75)
+        self.axes_m.set_title("Steering angle distribution")
+        self.axes_sp.hist(speeds, 100, normed=1, facecolor='green', alpha=0.75)
+        self.axes_sp.set_title("Speed distribution")
 
 class OtherTab(QWidget):
     def __init__(self):
