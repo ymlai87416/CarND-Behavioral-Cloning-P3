@@ -1,0 +1,87 @@
+Dropout: 0
+
+	Train on 55809 samples, validate on 13953 samples
+	Epoch 1/3
+	55809/55809 [==============================] - 83s - loss: 0.0527 - val_loss: 0.0411
+	Epoch 2/3
+	55809/55809 [==============================] - 79s - loss: 0.0382 - val_loss: 0.0516
+	Epoch 3/3
+	55809/55809 [==============================] - 80s - loss: 0.0320 - val_loss: 0.0444
+	
+	Test score (dropout: 0.0) : 0.044
+	
+	
+	Train on 39772 samples, validate on 9944 samples
+	Epoch 1/5
+	39772/39772 [==============================] - 75s - loss: 0.0593 - val_loss: 0.0494
+	Epoch 2/5
+	39772/39772 [==============================] - 72s - loss: 0.0433 - val_loss: 0.0535
+	Epoch 3/5
+	39772/39772 [==============================] - 72s - loss: 0.0354 - val_loss: 0.0549
+	Epoch 4/5
+	39772/39772 [==============================] - 74s - loss: 0.0294 - val_loss: 0.0484
+	Epoch 5/5
+	39772/39772 [==============================] - 72s - loss: 0.0256 - val_loss: 0.0523
+
+	Test score (dropout: 0.0) : 0.053
+	
+Dropout: 0.1
+
+	Train on 55809 samples, validate on 13953 samples
+	Epoch 1/3
+	55809/55809 [==============================] - 86s - loss: 0.0587 - val_loss: 0.0445
+	Epoch 2/3
+	55809/55809 [==============================] - 84s - loss: 0.0464 - val_loss: 0.0397
+	Epoch 3/3
+	55809/55809 [==============================] - 83s - loss: 0.0396 - val_loss: 0.0445
+	
+	Test score (dropout: 0.1) : 0.045
+	
+	* suceess in track 1 backward, 
+	* fail in track 2 backward (soon), fail in track 2 curve.
+	
+	Train on 40276 samples, validate on 10070 samples
+	Epoch 1/5
+	40276/40276 [==============================] - 79s - loss: 0.0697 - val_loss: 0.0532
+	Epoch 2/5
+	40276/40276 [==============================] - 76s - loss: 0.0525 - val_loss: 0.0523
+	Epoch 3/5
+	40276/40276 [==============================] - 74s - loss: 0.0460 - val_loss: 0.0504
+	Epoch 4/5
+	40276/40276 [==============================] - 75s - loss: 0.0415 - val_loss: 0.0511
+	Epoch 5/5
+	40276/40276 [==============================] - 74s - loss: 0.0388 - val_loss: 0.0531
+
+	Test score (dropout: 0.1) : 0.045
+	
+	* suceess in track 1 backward, 
+	* fail in track 2 backward (soon), fail in track 2 curve.
+	
+Dropout: 0.2
+
+	Train on 55809 samples, validate on 13953 samples
+	Epoch 1/3
+	55809/55809 [==============================] - 123s - loss: 0.0632 - val_loss: 0.0403
+	Epoch 2/3
+	55809/55809 [==============================] - 128s - loss: 0.0504 - val_loss: 0.0522
+	Epoch 3/3
+	55809/55809 [==============================] - 132s - loss: 0.0447 - val_loss: 0.0391
+	
+	Test score (dropout: 0.2) : 0.041
+	
+	fail in track 2, at the first curve, drow off the road around starting points
+	fail in track 2 reverse, at the big curve with edge..
+	
+	Train on 40180 samples, validate on 10046 samples
+	Epoch 1/5
+	40180/40180 [==============================] - 63s - loss: 0.0752 - val_loss: 0.0456
+	Epoch 2/5
+	40180/40180 [==============================] - 60s - loss: 0.0588 - val_loss: 0.0501
+	Epoch 3/5
+	40180/40180 [==============================] - 60s - loss: 0.0531 - val_loss: 0.0495
+	Epoch 4/5
+	40180/40180 [==============================] - 61s - loss: 0.0494 - val_loss: 0.0562
+	Epoch 5/5
+	40180/40180 [==============================] - 63s - loss: 0.0453 - val_loss: 0.0483
+	
+	Test score (dropout: 0.2) : 0.046
