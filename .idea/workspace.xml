@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8051f739-b661-499f-b9d2-01e49f273a99" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/final model/model.h5" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/track1.mp4" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/track2.mp4" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/train.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model.h5" afterPath="$PROJECT_DIR$/model.h5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/CarND-Behavioral-Cloning-P3-checkpoint.ipynb" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/CarND-Behavioral-Cloning-P3-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CarND-Behavioral-Cloning-P3.ipynb" afterPath="$PROJECT_DIR$/CarND-Behavioral-Cloning-P3.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/drive.bat" afterPath="$PROJECT_DIR$/drive.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/drive.py" afterPath="$PROJECT_DIR$/drive.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/writeup.md" afterPath="$PROJECT_DIR$/writeup.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,9 +46,9 @@
       <file leaf-file-name="writeup.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/writeup.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SECOND">
-              <first_editor relative-caret-position="258">
-                <caret line="235" column="20" lean-forward="true" selection-start-line="235" selection-start-column="20" selection-end-line="235" selection-end-column="20" />
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="273">
+                <caret line="236" column="19" lean-forward="false" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -447,7 +437,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -806,9 +796,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/writeup.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SECOND">
-          <first_editor relative-caret-position="258">
-            <caret line="235" column="20" lean-forward="true" selection-start-line="235" selection-start-column="20" selection-end-line="235" selection-end-column="20" />
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="273">
+            <caret line="236" column="19" lean-forward="false" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
             <folding />
           </first_editor>
           <second_editor />

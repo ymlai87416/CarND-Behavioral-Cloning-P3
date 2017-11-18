@@ -95,9 +95,9 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 For details about how I created the training data, see the next section. 
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
 
 The overall strategy for deriving a model architecture was 
 
@@ -145,7 +145,7 @@ To fix this, I reduce the range of steering angle so that I can reduce my reacti
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-####2. Final Model Architecture
+#### 2. Final Model Architecture
 
 The final model architecture (model.py lines 113-138) consisted of a convolution neural network with the following layers and layer sizes
 
@@ -179,7 +179,7 @@ Here is a visualization of the architecture copy from [1]
 
 ![alt text][imageM4]
 
-####3. Creation of the Training Set & Training Process
+#### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
@@ -225,13 +225,16 @@ The model is then tested to run the track 1, and track 2 (both clockwise and cou
 driving on those 3 settings without falling off the tracks.
 
 For details, please see 
+
 track1_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+
 track2_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 20mph
+
 track2_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 20mph
 
 Below figures show the activations of the first two feature map layers for an example input
 
-Example input
+Example input image
 
 ![alt text][imageR1]
 
