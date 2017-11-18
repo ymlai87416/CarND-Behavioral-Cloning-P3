@@ -226,17 +226,16 @@ I used an Adam optimizer so that manually training the learning rate wasn't nece
 
 ## Result and conclusion
 The model is then tested to run the track 1, and track 2 (both clockwise and counter-clockwise), The model excels in 
-driving on those 3 settings without falling off the tracks.
+driving on those 4 settings without falling off the tracks.
 
 For details, please see 
 
-track1_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+* track1_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+* track1_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+* track2_forward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
+* track2_backward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
 
-track1_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
-
-track2_forward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
-
-track2_backward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
+#### Internal CNN state
 
 Below figures show the activations of the first two feature map layers for an example input
 
