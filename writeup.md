@@ -54,9 +54,10 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup.md summarizing the results
-* video.mp4 is the recording to the car driving on track 1 in autonomous mode using the model submitted
-* track2.mp4 is the recording to the car driving on track 2 in autonomous mode using the model submitted
-
+* track1_forward.mp4 is the recording to the car driving on track 1 (forward) in autonomous mode using the model submitted
+* track1_backward.mp4 is the recording to the car driving on track 1 (backward) in autonomous mode using the model submitted
+* track2_forward.mp4 is the recording to the car driving on track 2 (forward) in autonomous mode using the model submitted
+* track2_backward.mp4 is the recording to the car driving on track 2 (backward) in autonomous mode using the model submitted
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -78,16 +79,16 @@ The model includes RELU layers to introduce nonlinearity, and the data is normal
 
 #### 2. Attempts to reduce overfitting in the model
 
-I have try to place dropout layers to the proposed model, but it turned out that it reduces the ability for the car to 
+I have tried to place dropout layers to the proposed model, but it turned out that it reduces the ability for the car to 
 turn around sharp corners. so I have set the dropout ratio to 0 (model.py lines 111).
  
-The model was trained and validated on same dataset and split in the ratio of 8:2 to ensure that the model was not overfitting (code line 141). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was trained and validated on the same dataset and split in the ratio of 8:2 to ensure that the model was not overfitting (code line 141). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 To avoid overfitting, the car is to drive the track in another direction, and the model could stay on the track in this setting.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 140).
+The model used an Adam optimizer, so the learning rate was not tuned manually (model.py line 140).
 
 #### 4. Appropriate training data
 
@@ -101,15 +102,15 @@ For details about how I created the training data, see the next section.
 
 The overall strategy for deriving a model architecture was 
 
-1. The speed of the car is control by a PI controller to keep the speed constant.
+1. The speed of the car is control by a PI controller to keep the speed stable.
 
-2. Captured image from the car is processed by the convolution neural network, and then 5 dense layers to make decision 
+2. Captured image from the car is processed by convolution layers, and then 5 dense layers to make decision 
 based on the features extracted by the convolution neural network and output a steering angle.
 
 
-My first step was to use a convolution neural network model similar to the the model proposed by Bojarski, M. in the paper
+My first step was to use a convolution neural network model similar to the model proposed by Bojarski, M. in the article
 "End to End Learning for Self-Driving Cars"[1]. I thought this model might be appropriate because it has been used by the 
-research team to control a real car driving in New Jersey with little intercepts from human.
+research team to control a real car driving in New Jersey with little intercepts from humans.
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. 
 I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. 
@@ -118,30 +119,31 @@ This implied that the model was overfitting.
 ![alt text][imageM1]
 
 
-To combat the overfitting, I modified the model so that dropout layer are added between the dense layer.
+To combat the overfitting, I modified the model so that dropout layers are added between the dense layer.
 
-Then I train the model using dropout rate = 0.1 and dropout rate = 0.2, and here is the result.
+Then I train the model using dropout rate = 0.1 and dropout rate = 0.2, the validation score is more or less the same, while
+ only the mean squared error of training set increasing. Here is the result.
 
 ![alt text][imageM2] ![alt text][imageM3]
 
 The final step was to run the simulator to see how well the car was driving around track one. The car kept on the track all
-the time. To increase the difficultly, the car was driving around track two. This time there were a few spots where 
-the vehicle fell off the track, the car usually failed to drive around the curve to improve the driving behavior 
+the time. To increase the difficulty, the car was driving around track two. This time there were a few spots where 
+the vehicle fell off the track, the car usually failed to drive around the curve. To improve the driving behavior 
 in these cases, I perform the following actions:
 
 1. Reduce the number of very low steering example in the training set, because the neural network may try to return a small
-steering angle to reduce the Mean standard error, which the car fails to drive around sharp curve.
+steering angle to reduce the mean squared error, which may cause the car fails to drive around a sharp curve.
 
-2. I use a game steering wheel in the simulator to collect train dataset. On track 2, there are many curve which force me to 
+2. I use a game steering wheel in the simulator to collect train dataset. On track 2, there are many curves which force me to 
 slow down so that I can have enough reaction time to turn my steering wheel. (The steering wheel is 1.5 circle in each direction)
 As a result, in the dataset, there are incorrect steering angles (too less or too much) for each image captured.
-Imagine at speed of 0mph, you can steer the car to the left or right, but this is not correct, and the neural network learn 
-the incorrect information and make the wrong decision.
+Imagine at speed of 0mph, you can steer the car to the left or right without falling off the track, but this may not be 
+the desired steering angle and the neural network learn the incorrect information and make the wrong decision.
 To fix this, I reduce the range of steering angle so that I can reduce my reaction time and drive on track 2 at > 25mph. 
 
 ![alt text][imageM5]
 
-3. Decreasing the dropout ratio. It works and make the car stay on track even on track 2.
+3. Decreasing the dropout ratio. It works and makes the car stay on track even on track 2.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
@@ -195,10 +197,11 @@ from left side to the center of the track :
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I also flipped images and angles thinking that this would help the model not only to drive left, but 
+To augment the data sat, I also flipped images and angles thinking that this would help the model not only to drive left but 
 also right. 
 
-Here is the statistics of the track 1 dataset driving anti-clockwise.
+Here are the statistics for the track 1 dataset driving anti-clockwise.
+
 ![alt text][imageDS5]
  
 For example, here is an image that has then been flipped:
@@ -206,16 +209,17 @@ For example, here is an image that has then been flipped:
 ![alt text][imageDS6] ![alt text][imageDS7]
 
 
-After the collection process, I had 55809 number of data points. I then preprocessed this data by removing more than half of the
-data points which the steering angles is between [-0.05, 0.05], and here is the final train dataset steering angle distribution. 
+After the collection process, I had 55809 data points. I then preprocessed this data by removing more than half of the
+data points which the steering angles are between [-0.05, 0.05], and here is the final train dataset steering angle distribution. 
 
 ![alt text][imageDS8]
 
 
-I finally randomly shuffled the data set and put 20% of the data into a validation set. 
+I finally randomly shuffled the dataset and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. 
-The ideal number of epochs was 5 as evidenced by the following graph, the validation error did slightly goes up on epoch 5. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or underfitting. 
+The ideal number of epochs was 5 as evidenced by the following graph, the validation error did slightly go up on epoch 5. 
+I used an Adam optimizer so that manually training the learning rate wasn't necessary.
 
 ![alt text][imageM1]
 
@@ -228,9 +232,11 @@ For details, please see
 
 track1_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
 
-track2_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 20mph
+track1_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
 
-track2_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 20mph
+track2_forward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
+
+track2_backward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
 
 Below figures show the activations of the first two feature map layers for an example input
 
