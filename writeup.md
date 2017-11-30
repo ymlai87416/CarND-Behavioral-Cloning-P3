@@ -200,7 +200,8 @@ Then I repeated this process on track two in order to get more data points.
 To augment the data sat, I also flipped images and angles thinking that this would help the model not only to drive left but 
 also right. 
 
-Here are the statistics for the track 1 dataset driving anti-clockwise.
+Here are the statistics for the track 1 dataset driving anti-clockwise, you can see that the number of data points < 0 is 
+more than that of data points > 0 
 
 ![alt text][imageDS5]
  
@@ -230,10 +231,10 @@ driving on those 4 settings without falling off the tracks.
 
 For details, please see 
 
-* track1_forward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
-* track1_backward.mp4: Car in autonomous mode driving on track 1 counter-clockwise at 25mph
-* track2_forward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
-* track2_backward.mp4: Car in autonomous mode driving on track 2 counter-clockwise at 20mph
+* [track1_forward.mp4](https://youtu.be/dbqpbb1rGpE): Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+* [track1_backward.mp4](https://youtu.be/YW1kv3ep0TQ): Car in autonomous mode driving on track 1 counter-clockwise at 25mph
+* [track2_forward.mp4](https://youtu.be/CM0xnTSwtg8): Car in autonomous mode driving on track 2 counter-clockwise at 20mph
+* [track2_backward.mp4](https://youtu.be/Orc5_xOtqVc): Car in autonomous mode driving on track 2 counter-clockwise at 20mph
 
 #### Internal CNN state
 
